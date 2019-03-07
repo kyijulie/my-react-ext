@@ -8,12 +8,13 @@ export default class List extends Component {
     super(props);
     this.state = {
       storageNames: [],
-      screenshot: ""
+      screenshot: this.props.screen
     };
     this.getStorageNames = this.getStorageNames.bind(this);
   }
   componentDidMount() {
     this.getStorageNames();
+    document.getElementById("box box1").appendChild(this.state.screenshot);
   }
 
   getStorageNames() {
@@ -38,7 +39,7 @@ export default class List extends Component {
     return (
       <div id="list">
         <div id="box ">
-          <button id="listbutton">Add a new Todo</button>
+          <button id="listbutton">Add a List</button>
         </div>
         {/* {this.state.storageNames.map(storagekey => (
           <ListEntry />

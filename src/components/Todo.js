@@ -12,20 +12,15 @@ export default class Todo extends Component {
     this.changeInput = this.changeInput.bind(this);
     this.submitInput = this.submitInput.bind(this);
     this.deleteEntry = this.deleteEntry.bind(this);
-    this.screenShot = this.screenShot.bind(this);
+
     this.hydrateStateWithLocalStorage = this.hydrateStateWithLocalStorage.bind(
       this
     );
   }
   componentDidMount() {
     this.hydrateStateWithLocalStorage();
-    this.screenShot();
   }
-  screenShot() {
-    html2canvas(document.querySelector("#main")).then(canvas => {
-      document.getElementById("box box1").appendChild(canvas);
-    });
-  }
+
   changeInput(e) {
     this.setState({
       todo: e.target.value

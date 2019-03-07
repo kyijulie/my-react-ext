@@ -4,18 +4,20 @@
   margin-left: 5px;
   margin-right: 5px;
   align-content: space-around;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   grid-gap: 5px 5px;
 }
 
-#box {
+#box1 {
   padding: 5px;
+  height: auto;
+  width: auto;
 }
 
 #listbutton {
-  height: 220px;
-  width: 116px;
+  height: auto;
+  width: auto;
   justify-self: stretch;
   padding: 5px;
   background-color: transparent;
