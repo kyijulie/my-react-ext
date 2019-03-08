@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ListEntry from "./ListEntry.js";
+//import ListEntry from "./ListEntry.js";
 
 import "./List.css";
 
@@ -41,9 +41,6 @@ export default class List extends Component {
         <div id="box ">
           <button id="listbutton">Add a List</button>
         </div>
-        {/* {this.state.storageNames.map(storagekey => (
-          <ListEntry />
-        ))} */}
         <div id="box box1" />
       </div>
     );

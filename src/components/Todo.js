@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import TodoEntry from "./TodoEntry.js";
-import html2canvas from "html2canvas";
 
 export default class Todo extends Component {
   constructor(props) {
@@ -54,12 +53,15 @@ export default class Todo extends Component {
       });
     }
   }
-  deleteEntry(id) {
+  deleteEntry(id, entry) {
+    console.log(entry);
     const list = [...this.state.todos];
     list.splice(id, 1);
     this.setState({
       todos: list
     });
+    localStorage.setItem(entry, false);
+    console.log(localStorage);
     localStorage.setItem("list", JSON.stringify(list));
   }
   render() {
@@ -69,7 +71,7 @@ export default class Todo extends Component {
           <form id="todoform">
             <input
               type="text"
-              id="todo"
+              id="todoinput"
               placeholder="Add Todo"
               onChange={this.changeInput}
             />

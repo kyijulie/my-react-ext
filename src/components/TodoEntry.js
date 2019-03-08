@@ -7,25 +7,32 @@ class TodoEntry extends Component {
       flag: false
     };
     this.strikeThroughEntry = this.strikeThroughEntry.bind(this);
-    //this.hydrateStateWithLocalStorage = this.hydrateStateWithLocalStorage.bind(
-    //this
-    //);
+    this.hydrateStateWithLocalStorage = this.hydrateStateWithLocalStorage.bind(
+      this
+    );
   }
   componentDidMount() {
-    //this.hydrateStateWithLocalStorage();
+    this.hydrateStateWithLocalStorage();
+    //localStorage.setItem(this.props.entry, this.state.flag);
   }
-  // hydrateStateWithLocalStorage() {
-  //   if (localStorage.hasOwnProperty(this.props.entry)) {
-  //     let value = localStorage.getItem(this.props.entry);
-  //     this.setState({
-  //       flag: value
-  //     });
-  //   }
-  // }
+  hydrateStateWithLocalStorage() {
+    if (localStorage.hasOwnProperty(this.props.entry)) {
+      let value = localStorage.getItem(this.props.entry);
+      this.setState({
+        flag: value
+      });
+    }
+    // console.log(localStorage);
+  }
   strikeThroughEntry() {
-    this.setState({
-      flag: !this.state.flag
-    });
+    this.setState(
+      {
+        flag: !this.state.flag
+      },
+      () => {
+        localStorage.setItem(this.props.entry, this.state.flag);
+      }
+    );
   }
   render() {
     return (
@@ -33,7 +40,9 @@ class TodoEntry extends Component {
         <span
           style={{ textDecoration: this.state.flag ? "line-through" : "none" }}
           onClick={() => this.strikeThroughEntry()}
-          onDoubleClick={() => this.props.delete(this.props.index)}
+          onDoubleClick={() =>
+            this.props.delete(this.props.index, this.props.entry)
+          }
         >
           {this.props.entry}
         </span>
