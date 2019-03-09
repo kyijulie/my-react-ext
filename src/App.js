@@ -8,44 +8,47 @@ class App extends Component {
     super(props);
     this.state = {
       container: "todo",
-      screenshot: "",
       toggle: false
     };
     this.toggleList = this.toggleList.bind(this);
+    this.collapseList = this.collapseList.bind(this);
   }
   componentDidMount() {}
 
   toggleList() {
-    if (this.state.toggle === false) {
-      let navs = document.querySelectorAll("#navbar-link");
-      navs.forEach(nav => {
-        nav.setAttribute("id", "navbar-link-toggle");
-      });
-      this.setState({
-        toggle: !this.state.toggle
-      });
+    // if (this.state.toggle === false) {
+    //   let navs = document.querySelectorAll("#navbar-link");
+    //   navs.forEach(nav => {
+    //     nav.setAttribute("id", "navbar-link-toggle");
+    //   });
+    //   this.setState({
+    //     toggle: !this.state.toggle
+    //   });
+    // } else {
+    //   let navs = document.querySelectorAll("#navbar-link-toggle");
+    //   navs.forEach(nav => {
+    //     nav.setAttribute("id", "navbar-link");
+    //   });
+    //   this.setState({
+    //     toggle: !this.state.toggle
+    //   });
+    // }
+    let dropdown = document.getElementById("dropdown1");
+    if (dropdown.style.display === "none") {
+      dropdown.style.display = "block";
     } else {
-      let navs = document.querySelectorAll("#navbar-link-toggle");
-      navs.forEach(nav => {
-        nav.setAttribute("id", "navbar-link");
-      });
-      this.setState({
-        toggle: !this.state.toggle
-      });
+      dropdown.style.display = "none";
     }
   }
-
+  collapseList() {
+    let dropdown = document.getElementById("dropdown1");
+    dropdown.style.display = "none";
+  }
   render() {
     return (
       <div id="main">
-        <div id="todo-nav">
-          Todo
-          <div id="container">
-            <Todo />
-          </div>
-        </div>
         <div id="navbar">
-          <div id="list-nav">
+          <div id="list-nav" className="dropdown">
             <a
               id="list-title"
               data-toggle="dropdown"
@@ -54,15 +57,24 @@ class App extends Component {
             >
               &#9776;
             </a>
-            <div id="navbar-link">
-              <a href="#">Page 1-1</a>
-            </div>
-            <div id="navbar-link">
-              <a href="#">Page 1-2</a>
-            </div>
-            <div id="navbar-link">
-              <a href="#">Page 1-3</a>
-            </div>
+
+            <ul id="dropdown1">
+              <li id="navbar-link">
+                <a href="#">+ Add a new todo</a>
+              </li>
+              <li id="navbar-link">
+                <a href="#">Page 1-2</a>
+              </li>
+              <li id="navbar-link">
+                <a href="#">Page 1-3</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="todo-nav" onClick={this.collapseList}>
+          Todo
+          <div id="container">
+            <Todo />
           </div>
         </div>
       </div>

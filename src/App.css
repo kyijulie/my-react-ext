@@ -6,7 +6,6 @@ body {
 }
 
 #main {
-  display: float;
   margin: 0px;
   padding: 0px;
   font-size: 40px;
@@ -17,16 +16,23 @@ body {
 }
 
 #todo-nav {
-  float: left;
-  width: 300px;
-  position: fixed;
+  display: float;
+  float: right;
+  width: 350px;
+  height: 500px;
+  position: relative;
   text-align: center;
+  z-index: 1;
 }
 
 #navbar {
-  float: right;
-  width: 70px;
-
+  float: left;
+  transition: bottom ease-out 0.5s;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  z-index: 2;
   /* float: left;
   text-align: center;
   text-decoration: none;
@@ -43,32 +49,44 @@ body {
 
 #list-nav {
   display: flex;
+  background: #b1b8e9 !important;
   flex-direction: column;
-  background-color: #fff;
   border: 1px solid #ccc;
   height: 500px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: left;
+}
+#dropdown1 {
+  display: none;
+  list-style-type: none;
+  margin: 0px;
+  align-self: flex-start;
+  cursor: pointer;
+  width: 100px;
+  flex-direction: column;
 }
 /* #list-title {
   margin-left: auto;
-} */
-#navbar-link {
+} 
+ #navbar-link {
   padding-right: 8px;
 
   display: none;
 }
 #navbar-link-toggle {
-  position: relative;
-  /* transition-property: color;
+  transition-property: width;
   transition-duration: 0.5s;
   transition-timing-function: ease-in;
-  transition-delay: 0.3s; */
+  transition-delay: 0.3s;
 
-  align-self: flex-end;
+  align-self: flex-start;
   display: initial;
   cursor: pointer;
-  width: 200px;
+  width: 100px;
   flex-direction: column;
-}
+} */
 #formInput {
   margin-left: 15px;
   text-align: left;
@@ -78,7 +96,6 @@ body {
   width: 300px;
   font-size: 15px;
   outline: 0;
-  background: transparent;
   border-bottom: 1px solid black;
 }
 #todo {
