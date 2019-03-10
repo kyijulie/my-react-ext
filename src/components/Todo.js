@@ -6,7 +6,8 @@ export default class Todo extends Component {
     super(props);
     this.state = {
       todo: "",
-      todos: []
+      todos: [],
+      name: this.props.navName
     };
     this.changeInput = this.changeInput.bind(this);
     this.submitInput = this.submitInput.bind(this);
@@ -37,7 +38,9 @@ export default class Todo extends Component {
         },
         () => {
           let storage = this.state.todos;
+
           localStorage.setItem("list", JSON.stringify(storage));
+          console.log(localStorage);
         }
       );
     }
@@ -72,7 +75,7 @@ export default class Todo extends Component {
             <input
               type="text"
               id="todoinput"
-              placeholder="Add Todo"
+              placeholder="Add Task"
               onChange={this.changeInput}
             />
             <button id="click" onClick={this.submitInput} />
