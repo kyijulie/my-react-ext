@@ -9,8 +9,14 @@ class App extends Component {
     this.state = {
       container: "todo",
       toggle: false,
-      navLists: []
+      navLists: [],
+      title: "Todo"
     };
+    this.showEdit = this.showEdit.bind(this);
+    this.hideEdit = this.hideEdit.bind(this);
+    this.changeTitle = this.changeTitle.bind(this);
+    this.submitTitle = this.submitTitle.bind(this);
+    this.editTitle = this.editTitle.bind(this);
     this.getNavList = this.getNavList.bind(this);
     this.changeToNewTodo = this.changeToNewTodo.bind(this);
     this.toggleList = this.toggleList.bind(this);
@@ -41,8 +47,35 @@ class App extends Component {
     let dropdown = document.getElementById("dropdown1");
     dropdown.style.display = "none";
   }
+
+  editTitle() {
+    let input = document.getElementById("editTitle");
+    input.style.display = "block";
+    let title = document.getElementById("title");
+    title.style.display = "none";
+  }
+  submitTitle(e) {
+    e.preventDefault();
+    let input = document.getElementById("editTitle");
+    input.style.display = "none";
+    let title = document.getElementById("title");
+    title.style.display = "block";
+  }
+  changeTitle(e) {
+    this.setState({
+      title: e.target.value
+    });
+  }
+  showEdit() {
+    let edit = document.getElementById("edit");
+    edit.style.display = "block";
+  }
+  hideEdit() {
+    let edit = document.getElementById("edit");
+    edit.style.display = "none";
+  }
   render() {
-    container = <Todo navName="newTodo" />;
+    container = <Todo navName={this.state.title} />;
     return (
       <div id="main">
         <div id="navbar">
@@ -77,7 +110,25 @@ class App extends Component {
           </div>
         </div>
         <div id="todo-nav" onClick={this.collapseList}>
-          Todo
+          <div
+            id="title"
+            onMouseOver={this.showEdit}
+            onMouseLeave={this.hideEdit}
+          >
+            {this.state.title}
+            <span onClick={this.editTitle} id="edit">
+              Edit
+            </span>
+          </div>
+          <form>
+            <input
+              id="editTitle"
+              type="text"
+              placeholder={this.state.title}
+              onChange={this.changeTitle}
+            />
+            <button id="click" onClick={this.submitTitle} />
+          </form>
           <div id="container">{container}</div>
         </div>
       </div>

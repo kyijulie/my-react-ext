@@ -24,6 +24,18 @@ body {
   text-align: center;
   z-index: 1;
 }
+#title {
+  display: block;
+  position: absolute;
+}
+#edit {
+  display: none;
+  float: right;
+}
+
+#editTitle {
+  display: none;
+}
 
 #navbar {
   float: left;

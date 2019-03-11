@@ -48,8 +48,8 @@ export default class Todo extends Component {
     document.getElementById("todoform").reset();
   }
   hydrateStateWithLocalStorage() {
-    if (localStorage.hasOwnProperty("list")) {
-      let value = localStorage.getItem("list");
+    if (localStorage.hasOwnProperty(this.state.navName)) {
+      let value = localStorage.getItem(this.state.navName);
       value = JSON.parse(value);
       this.setState({
         todos: value
