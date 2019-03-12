@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Todo from "./components/Todo.js";
-//import List from "./components/List.js";
+import EditPic from "./pictures/edit-icon-png-24.png";
 import "./App.css";
 let container;
 class App extends Component {
@@ -50,7 +50,7 @@ class App extends Component {
 
   editTitle() {
     let input = document.getElementById("editTitle");
-    input.style.display = "block";
+    input.style.display = "flex";
     let title = document.getElementById("title");
     title.style.display = "none";
   }
@@ -59,7 +59,7 @@ class App extends Component {
     let input = document.getElementById("editTitle");
     input.style.display = "none";
     let title = document.getElementById("title");
-    title.style.display = "block";
+    title.style.display = "flex";
   }
   changeTitle(e) {
     this.setState({
@@ -68,7 +68,7 @@ class App extends Component {
   }
   showEdit() {
     let edit = document.getElementById("edit");
-    edit.style.display = "block";
+    edit.style.display = "inline-block";
   }
   hideEdit() {
     let edit = document.getElementById("edit");
@@ -116,19 +116,21 @@ class App extends Component {
             onMouseLeave={this.hideEdit}
           >
             {this.state.title}
-            <span onClick={this.editTitle} id="edit">
-              Edit
-            </span>
+            <div onClick={this.editTitle} id="edit">
+              <img src={EditPic} id="editpic"/>
+            </div>
           </div>
-          <form>
-            <input
-              id="editTitle"
-              type="text"
-              placeholder={this.state.title}
-              onChange={this.changeTitle}
-            />
-            <button id="click" onClick={this.submitTitle} />
-          </form>
+          <div id="form">
+            <form id="formTitle">
+              <input
+                id="editTitle"
+                type="text"
+                placeholder={this.state.title}
+                onChange={this.changeTitle}
+              />
+              <button id="click" onClick={this.submitTitle} />
+            </form>
+          </div>
           <div id="container">{container}</div>
         </div>
       </div>

@@ -8,11 +8,10 @@ body {
 #main {
   margin: 0px;
   padding: 0px;
-  font-size: 40px;
+  font-size: 25px;
   color: #000;
   text-align: center;
   text-decoration: none;
-  font-size: 25px;
 }
 
 #todo-nav {
@@ -21,16 +20,19 @@ body {
   width: 350px;
   height: 500px;
   position: relative;
-  text-align: center;
   z-index: 1;
 }
 #title {
-  display: block;
-  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  position: relative;
 }
-#edit {
-  display: none;
-  float: right;
+
+#form {
+  position: relative;
+  display: flex;
+  justify-content: center;
 }
 
 #editTitle {
@@ -123,4 +125,14 @@ body {
 }
 #click {
   visibility: hidden;
+}
+
+#edit {
+  display: none;
+  flex-direction: row;
+  position: relative;
+}
+#editpic {
+  width: 30px;
+  height: 30px;
 }
