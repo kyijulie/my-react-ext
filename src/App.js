@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Todo from "./components/Todo.js";
 import EditPic from "./pictures/edit-icon-png-24.png";
+import deletePic from "./pictures/x.png";
 import "./App.css";
 
 let oldList;
@@ -14,6 +15,8 @@ class App extends Component {
       navLists: [],
       title: "Todo"
     };
+    this.showDelete = this.deleteList.bind(this);
+    this.hideDelete = this.hideDelete.bind(this);
     this.showEdit = this.showEdit.bind(this);
     this.hideEdit = this.hideEdit.bind(this);
     this.changeTitle = this.changeTitle.bind(this);
@@ -27,11 +30,15 @@ class App extends Component {
   }
   componentDidMount() {
     this.getNavList();
-    setTimeout(() => {
-      this.setState({
-        title: this.state.navLists[0]
-      });
-    }, 50);
+    if (this.state.navLists.length !== 0) {
+      setTimeout(() => {
+        this.setState({
+          title: this.state.navLists[0]
+        });
+      }, 0);
+    } else {
+      this.changeToNewTodo("new");
+    }
   }
   // componentDidUpdate() {
   //   this.getNavList;
@@ -51,7 +58,7 @@ class App extends Component {
       dropdown.style.display = "none";
     }
   }
-  changeToNewTodo(navName = "newTodo") {
+  changeToNewTodo(navName = "new") {
     if (navName === "new") {
       this.setState({
         title: "New Todo"
@@ -107,8 +114,26 @@ class App extends Component {
     let edit = document.getElementById("edit");
     edit.style.display = "none";
   }
+  showDelete() {
+    let deleteIcon = document.getElementById("deletelist");
+    deleteIcon.style.display = "inline-block";
+  }
+  hideDelete() {
+    let deleteIcon = document.getElementById("deletelist");
+    deleteIcon.style.display = "none";
+  }
   deleteList(navName) {
     localStorage.removeItem(navName);
+    this.getNavList();
+    if (this.state.navLists.length !== 0) {
+      setTimeout(() => {
+        this.setState({
+          title: this.state.navLists[0]
+        });
+      }, 50);
+    } else {
+      this.changeToNewTodo("new");
+    }
   }
   render() {
     return (
@@ -135,9 +160,16 @@ class App extends Component {
                   <a
                     href="#"
                     onClick={() => this.changeToNewTodo(navName)}
-                    onDoubleClick={() => this.deleteList(navName)}
+                    // onMouseOver={this.showDelete}
+                    // onMouseLeave={this.hideDelete}
                   >
-                    {navName}
+                    {navName}{" "}
+                    <div
+                      id="deletelist"
+                      onClick={() => this.deleteList(navName)}
+                    >
+                      <img src={deletePic} id="deletelistpic" />
+                    </div>
                   </a>
                 </li>
               ))}

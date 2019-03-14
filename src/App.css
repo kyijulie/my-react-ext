@@ -2,13 +2,13 @@ body {
   height: 500px;
   width: 370px;
   margin: 0px;
-  font-family: "Fjalla One", sans-serif;
+  font-family: "Amatic SC", cursive;
 }
 
 #main {
   margin: 0px;
   padding: 0px;
-  font-size: 25px;
+  font-size: 30px;
   color: #000;
   text-align: center;
   text-decoration: none;
@@ -24,6 +24,7 @@ body {
 }
 #title {
   display: flex;
+  font-size: 40px;
   flex-direction: row;
   justify-content: center;
   position: relative;
@@ -39,7 +40,7 @@ body {
   border: 0;
   width: 100px;
   text-align: center;
-  font-size: 25px;
+  font-size: 15px;
   outline: 0;
   border-bottom: 1px solid black;
 }
@@ -73,12 +74,12 @@ body {
   text-align: left;
 }
 #dropdown1 {
+  width: 200px;
   display: none;
   list-style-type: none;
   margin: 0px;
   padding: 4px;
   cursor: pointer;
-  width: 100px;
   flex-direction: column;
 }
 #navbar-link {
@@ -116,7 +117,8 @@ body {
 #todoinput {
   border: 0;
   width: 300px;
-  font-size: 15px;
+  font-family: "Amatic SC", cursive;
+  font-size: 25px;
   outline: 0;
   border-bottom: 1px solid black;
 }
@@ -124,10 +126,12 @@ body {
   text-align: left;
   margin-left: 15px;
   height: 30px;
+  font-size: 20px;
 }
 #todoentry {
-  padding: 10px;
-  font-size: 15px;
+  font-size: 35px;
+  padding: 0px;
+  margin: 0px;
   list-style-type: none;
   height: 40px;
 }
@@ -147,4 +151,12 @@ body {
   position: absolute;
   top: 40px;
   right: 0px;
+}
+
+#deletelist {
+  display: inline-block;
+}
+#deletelistpic {
+  width: 20px;
+  height: 20px;
 }
