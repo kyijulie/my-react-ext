@@ -19,8 +19,25 @@ export default class Todo extends Component {
   }
   componentDidMount() {
     this.hydrateStateWithLocalStorage();
+    if (this.state.title === "New Todo") {
+      this.setState({
+        todos: []
+      });
+    }
   }
-
+  componentDidUpdate(prevProps) {
+    //console.log("update", this.props.navName, prevProps.navName);
+    if (this.props.navName !== prevProps.navName) {
+      this.setState(
+        {
+          name: this.props.navName
+        },
+        () => {
+          this.hydrateStateWithLocalStorage();
+        }
+      );
+    }
+  }
   changeInput(e) {
     this.setState({
       todo: e.target.value
@@ -39,7 +56,7 @@ export default class Todo extends Component {
         () => {
           let storage = this.state.todos;
 
-          localStorage.setItem("list", JSON.stringify(storage));
+          localStorage.setItem(this.state.name, JSON.stringify(storage));
           console.log(localStorage);
         }
       );
@@ -48,8 +65,9 @@ export default class Todo extends Component {
     document.getElementById("todoform").reset();
   }
   hydrateStateWithLocalStorage() {
-    if (localStorage.hasOwnProperty(this.state.navName)) {
-      let value = localStorage.getItem(this.state.navName);
+    console.log("this is navName", this.state.name);
+    if (localStorage.hasOwnProperty(this.state.name)) {
+      let value = localStorage.getItem(this.state.name) || [];
       value = JSON.parse(value);
       this.setState({
         todos: value
@@ -63,9 +81,8 @@ export default class Todo extends Component {
     this.setState({
       todos: list
     });
-    localStorage.setItem(entry, false);
-    console.log(localStorage);
-    localStorage.setItem("list", JSON.stringify(list));
+
+    localStorage.setItem(this.state.name, JSON.stringify(list));
   }
   render() {
     return (

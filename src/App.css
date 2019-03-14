@@ -31,14 +31,18 @@ body {
 
 #form {
   position: relative;
-  display: flex;
+  display: none;
   justify-content: center;
 }
 
 #editTitle {
-  display: none;
+  border: 0;
+  width: 100px;
+  text-align: center;
+  font-size: 25px;
+  outline: 0;
+  border-bottom: 1px solid black;
 }
-
 #navbar {
   float: left;
   transition: bottom ease-out 0.5s;
@@ -57,10 +61,6 @@ body {
   text-decoration: none;
 }
 
-#navbar a:hover {
-  color: #ddd;
-}
-
 #list-nav {
   display: flex;
   background: #b1b8e9 !important;
@@ -76,10 +76,18 @@ body {
   display: none;
   list-style-type: none;
   margin: 0px;
-  align-self: flex-start;
+  padding: 4px;
   cursor: pointer;
   width: 100px;
   flex-direction: column;
+}
+#navbar-link {
+  margin-left: 0px;
+  padding: 3px;
+}
+#navbar-link:hover {
+  background: #ddd;
+  transition: all 0.5s;
 }
 /* #list-title {
   margin-left: auto;
@@ -129,10 +137,14 @@ body {
 
 #edit {
   display: none;
-  flex-direction: row;
-  position: relative;
+  float: left;
 }
 #editpic {
   width: 30px;
   height: 30px;
+}
+#container {
+  position: absolute;
+  top: 40px;
+  right: 0px;
 }

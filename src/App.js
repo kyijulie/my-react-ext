@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import Todo from "./components/Todo.js";
 import EditPic from "./pictures/edit-icon-png-24.png";
 import "./App.css";
-let container;
+
+let oldList;
+let oldStorage;
 class App extends Component {
   constructor(props) {
     super(props);
@@ -21,10 +23,19 @@ class App extends Component {
     this.changeToNewTodo = this.changeToNewTodo.bind(this);
     this.toggleList = this.toggleList.bind(this);
     this.collapseList = this.collapseList.bind(this);
+    this.deleteList = this.deleteList.bind(this);
   }
   componentDidMount() {
     this.getNavList();
+    setTimeout(() => {
+      this.setState({
+        title: this.state.navLists[0]
+      });
+    }, 50);
   }
+  // componentDidUpdate() {
+  //   this.getNavList;
+  // }
   getNavList() {
     let navlist = Object.keys(localStorage);
     this.setState({
@@ -41,7 +52,20 @@ class App extends Component {
     }
   }
   changeToNewTodo(navName = "newTodo") {
-    container = <Todo navName={navName} />;
+    if (navName === "new") {
+      this.setState({
+        title: "New Todo"
+      });
+      let newTodo = [];
+      localStorage.setItem("New Todo", JSON.stringify(newTodo));
+      this.getNavList();
+    } else {
+      this.setState({
+        title: navName
+      });
+    }
+
+    this.collapseList();
   }
   collapseList() {
     let dropdown = document.getElementById("dropdown1");
@@ -49,17 +73,26 @@ class App extends Component {
   }
 
   editTitle() {
-    let input = document.getElementById("editTitle");
+    let input = document.getElementById("form");
     input.style.display = "flex";
     let title = document.getElementById("title");
     title.style.display = "none";
+    oldList = this.state.title;
+    oldStorage = localStorage.getItem(oldList);
   }
   submitTitle(e) {
     e.preventDefault();
-    let input = document.getElementById("editTitle");
+    let input = document.getElementById("form");
     input.style.display = "none";
     let title = document.getElementById("title");
     title.style.display = "flex";
+    localStorage.removeItem(oldList);
+    if (oldStorage === null) {
+      let empty = [];
+      oldStorage = JSON.stringify(empty);
+    }
+    localStorage.setItem(this.state.title, oldStorage);
+    this.getNavList();
   }
   changeTitle(e) {
     this.setState({
@@ -74,8 +107,10 @@ class App extends Component {
     let edit = document.getElementById("edit");
     edit.style.display = "none";
   }
+  deleteList(navName) {
+    localStorage.removeItem(navName);
+  }
   render() {
-    container = <Todo navName={this.state.title} />;
     return (
       <div id="main">
         <div id="navbar">
@@ -91,11 +126,17 @@ class App extends Component {
 
             <ul id="dropdown1">
               <li id="navbar-link">
-                <a href="#">+ Add a new todo</a>
+                <a href="#" onClick={() => this.changeToNewTodo("new")}>
+                  + new list
+                </a>
               </li>
               {this.state.navLists.map(navName => (
                 <li id="navbar-link">
-                  <a href="#" onClick={() => this.changeToNewTodo(navName)}>
+                  <a
+                    href="#"
+                    onClick={() => this.changeToNewTodo(navName)}
+                    onDoubleClick={() => this.deleteList(navName)}
+                  >
                     {navName}
                   </a>
                 </li>
@@ -117,9 +158,10 @@ class App extends Component {
           >
             {this.state.title}
             <div onClick={this.editTitle} id="edit">
-              <img src={EditPic} id="editpic"/>
+              <img src={EditPic} id="editpic" />
             </div>
           </div>
+
           <div id="form">
             <form id="formTitle">
               <input
@@ -131,7 +173,9 @@ class App extends Component {
               <button id="click" onClick={this.submitTitle} />
             </form>
           </div>
-          <div id="container">{container}</div>
+          <div id="container">
+            <Todo navName={this.state.title} />
+          </div>
         </div>
       </div>
     );
